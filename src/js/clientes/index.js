@@ -14,6 +14,8 @@ const getClientes = async () => {
     const apellido = formulario.cli_apellido.value
     const nit = formulario.cli_nit.value
     const telefono = formulario.cli_telefono.value
+    console.log(nombre, apellido, nit, telefono)
+    
     const url = `/moran_mejia_IS2_crudjs/controladores/clientes/index.php?cli_nombre=${nombre}&cli_apellido=${apellido}&cli_nit=${nit}&cli_telefono=${telefono}`
     const config = {
         method: 'GET'
@@ -22,11 +24,12 @@ const getClientes = async () => {
     try {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
+        console.log(data);
 
         tablaClientes.tBodies[0].innerHTML = ''
         const fragment = document.createDocumentFragment()
         let contador = 1;
-        console.log(data);
+        
         if (respuesta.status == 200) {
             Swal.mixin({
                 toast: true,
@@ -50,6 +53,8 @@ const getClientes = async () => {
                     const celda3 = document.createElement('td')
                     const celda4 = document.createElement('td')
                     const celda5 = document.createElement('td')
+                    const celda6 = document.createElement('td')
+                    const celda7 = document.createElement('td')
                     const buttonModificar = document.createElement('button')
                     const buttonEliminar = document.createElement('button')
 
@@ -66,14 +71,16 @@ const getClientes = async () => {
                     buttonEliminar.textContent = 'Eliminar'
                     buttonEliminar.classList.add('btn', 'btn-danger', 'w-100')
 
-                    celda4.appendChild(buttonModificar)
-                    celda5.appendChild(buttonEliminar)
+                    celda6.appendChild(buttonModificar)
+                    celda7.appendChild(buttonEliminar)
 
                     tr.appendChild(celda1)
                     tr.appendChild(celda2)
                     tr.appendChild(celda3)
                     tr.appendChild(celda4)
                     tr.appendChild(celda5)
+                    tr.appendChild(celda6)
+                    tr.appendChild(celda7)
                     fragment.appendChild(tr);
 
                     contador++
@@ -137,7 +144,7 @@ const guardarClientes = async (e) => {
 
         if (codigo == 1 && respuesta.status == 200) {
             getClientes();
-            formulario.reset();
+            //formulario.reset();
         } else {
             console.log(detalle);
         }

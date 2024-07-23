@@ -37,7 +37,7 @@ class cliente extends Conexion
         }
 
         if ($this->cli_apellido != '') {
-            $sql .= " and cli_apellido = %$this->cli_apellido% ";
+            $sql .= " and cli_apellido like '%$this->cli_apellido%' ";
         }
 
         if ($this->cli_nit != '') {
@@ -54,6 +54,7 @@ class cliente extends Conexion
 
         $resultado = self::servir($sql);
         return $resultado;
+        
     }
 
     // public function modificar()

@@ -71,6 +71,6 @@
         </div>
     </div>
 </div>
-<script defer src="/moran_mejia_IS2_crudjs/src/js/funciones.php"></script>
-<script defer src="/moran_mejia_IS2_crudjs/src/js/clientes/funciones.php"></script>
+<script defer src="/moran_mejia_IS2_crudjs/src/js/funciones.js"></script>
+<script defer src="/moran_mejia_IS2_crudjs/src/js/clientes/index.js"></script>
 <?php include_once '../../includes/footer.php' ?>
