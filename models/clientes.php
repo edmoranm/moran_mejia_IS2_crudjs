@@ -65,11 +65,11 @@ class cliente extends Conexion
     return $resultado;
     }
 
-    // public function eliminar()
-    // {
-    //      $sql = "UPDATE clientes SET cli_situacion = 0 where cli_id = $this->cli_id";
+    public function eliminar()
+    {
+         $sql = "UPDATE clientes SET cli_situacion = 0 where cli_id = $this->cli_id";
 
-    //      $resultado = self::ejecutar($sql);
-    //      return $resultado;
-    //  }
+         $resultado = self::ejecutar($sql);
+         return $resultado;
+     }
 }
