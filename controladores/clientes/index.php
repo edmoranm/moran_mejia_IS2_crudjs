@@ -10,22 +10,27 @@ try {
     switch ($metodo) {
         case 'POST':
             $cliente = new cliente($_POST);
-                switch ($tipo) {
-                    case '1':
+            switch ($tipo) {
+                case '1':
 
-                        $ejecucion = $cliente->guardar();
-                        $mensaje = "Guardado correctamente";
-                        break;
+                    $ejecucion = $cliente->guardar();
+                    $mensaje = "Guardado correctamente";
+                    break;
+                case '2':
 
-                    default:
+                    $ejecucion = $cliente->modificar();
+                    $mensaje = "Modificado correctamente";
+                    break;
 
-                        break;
-                }
-                http_response_code(200);
-                echo json_encode([
-                    "mensaje" => $mensaje,
-                    "codigo" => 1,
-                ]);
+                default:
+
+                    break;
+            }
+            http_response_code(200);
+            echo json_encode([
+                "mensaje" => $mensaje,
+                "codigo" => 1,
+            ]);
 
             break;
         case 'GET':

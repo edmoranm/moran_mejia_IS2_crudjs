@@ -57,19 +57,19 @@ class cliente extends Conexion
         
     }
 
-    // public function modificar()
-    // {
-    //     $sql = "UPDATE clientes SET cli_nombre = '$this->cli_nombre', cli_apellido = $this->cli_apellido, cli_nit = $this->cli_nit, cli_telefono = $this->cli_telefono where cli_id = $this->cli_id";
+    public function modificar()
+    {
+    $sql = "UPDATE clientes SET cli_nombre = '$this->cli_nombre', cli_apellido = '$this->cli_apellido', cli_nit = '$this->cli_nit', cli_telefono = '$this->cli_telefono' where cli_id = '$this->cli_id'";
 
-    //     $resultado = self::ejecutar($sql);
-    //     return $resultado;
-    // }
+    $resultado = self::ejecutar($sql);
+    return $resultado;
+    }
 
     // public function eliminar()
     // {
-    //     $sql = "UPDATE clientes SET cli_situacion = 0 where cli_id = $this->cli_id";
+    //      $sql = "UPDATE clientes SET cli_situacion = 0 where cli_id = $this->cli_id";
 
-    //     $resultado = self::ejecutar($sql);
-    //     return $resultado;
-    // }
+    //      $resultado = self::ejecutar($sql);
+    //      return $resultado;
+    //  }
 }
