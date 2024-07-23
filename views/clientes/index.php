@@ -19,13 +19,13 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="cli_nit">Nit del cliente</label>
-                    <input type="text" name="cli_nit" id="cli_nit" class="form-control" required>
+                    <input type="number" name="cli_nit" id="cli_nit" class="form-control" required>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
                     <label for="cli_telefono">Telefono del cliente</label>
-                    <input type="text" name="cli_telefono" id="cli_telefono" class="form-control" required>
+                    <input type="number" name="cli_telefono" id="cli_telefono" class="form-control" required>
                 </div>
             </div>
             <div class="row justify-content-center mb-3">
@@ -50,12 +50,14 @@
     <div class="row justify-content-center">
         <div class="col-lg-8 table-responsive">
             <h2 class="text-center">Listado de clientes</h2>
-            <table class="table table-bordered table-hover" id="tablaclis">
+            <table class="table table-bordered table-hover" id="tablaClientes">
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Descripción</th>
-                        <th>apellido</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>nit</th>
+                        <th>telefono</th>
                         <th>Modificar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -69,6 +71,6 @@
         </div>
     </div>
 </div>
-<script defer src="/src/js/funciones.js"></script>
-<script defer src="../../src/js/clientes/index.js"></script>
+<script defer src="/moran_mejia_IS2_crudjs/src/js/funciones.php"></script>
+<script defer src="/moran_mejia_IS2_crudjs/src/js/clientes/funciones.php"></script>
 <?php include_once '../../includes/footer.php' ?>

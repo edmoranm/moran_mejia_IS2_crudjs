@@ -1,7 +1,7 @@
 <?php
 require_once 'conexion.php';
 
-class clientes extends Conexion
+class cliente extends Conexion
 {
     public $cli_id;
     public $cli_nombre;
@@ -23,7 +23,7 @@ class clientes extends Conexion
 
     public function guardar()
     {
-        $sql = "INSERT INTO clientes(cli_nombre, cli_apellido, cli_nit, cli_telefono) values('$this->cli_nombre','$this->cli_apellido','$this->cli_nit','$this->cli_telefono')";
+        $sql = "INSERT INTO clientes(cli_nombre, cli_apellido, cli_nit, cli_telefono) values('$this->cli_nombre', '$this->cli_apellido', '$this->cli_nit', '$this->cli_telefono')";
         $resultado = self::ejecutar($sql);
         return $resultado;
     }
@@ -37,7 +37,7 @@ class clientes extends Conexion
         }
 
         if ($this->cli_apellido != '') {
-            $sql .= " and cli_apellido = $this->cli_apellido ";
+            $sql .= " and cli_apellido = %$this->cli_apellido% ";
         }
 
         if ($this->cli_nit != '') {
@@ -56,19 +56,19 @@ class clientes extends Conexion
         return $resultado;
     }
 
-    public function modificar()
-    {
-        $sql = "UPDATE clientes SET cli_nombre = '$this->cli_nombre', cli_apellido = $this->cli_apellido where cli_id = $this->cli_id";
+    // public function modificar()
+    // {
+    //     $sql = "UPDATE clientes SET cli_nombre = '$this->cli_nombre', cli_apellido = $this->cli_apellido, cli_nit = $this->cli_nit, cli_telefono = $this->cli_telefono where cli_id = $this->cli_id";
 
-        $resultado = self::ejecutar($sql);
-        return $resultado;
-    }
+    //     $resultado = self::ejecutar($sql);
+    //     return $resultado;
+    // }
 
-    public function eliminar()
-    {
-        $sql = "UPDATE clientes SET cli_situacion = 0 where cli_id = $this->cli_id";
+    // public function eliminar()
+    // {
+    //     $sql = "UPDATE clientes SET cli_situacion = 0 where cli_id = $this->cli_id";
 
-        $resultado = self::ejecutar($sql);
-        return $resultado;
-    }
+    //     $resultado = self::ejecutar($sql);
+    //     return $resultado;
+    // }
 }

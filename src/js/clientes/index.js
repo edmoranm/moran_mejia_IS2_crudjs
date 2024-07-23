@@ -3,13 +3,13 @@ const btnModificar = document.getElementById('btnModificar')
 const btnBuscar = document.getElementById('btnBuscar')
 const btnCancelar = document.getElementById('btnCancelar')
 const btnLimpiar = document.getElementById('btnLimpiar')
-const tablaclientes = document.getElementById('tablaclientes')
+const tablaClientes = document.getElementById('tablaClientes')
 const formulario = document.querySelector('form')
 
 btnModificar.parentElement.style.display = 'none'
 btnCancelar.parentElement.style.display = 'none'
 
-const getclientes = async () => {
+const getClientes = async () => {
     const nombre = formulario.cli_nombre.value
     const apellido = formulario.cli_apellido.value
     const nit = formulario.cli_nit.value
@@ -23,7 +23,7 @@ const getclientes = async () => {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
 
-        tablaclientes.tBodies[0].innerHTML = ''
+        tablaClientes.tBodies[0].innerHTML = ''
         const fragment = document.createDocumentFragment()
         let contador = 1;
         console.log(data);
@@ -92,20 +92,20 @@ const getclientes = async () => {
             console.log('hola');
         }
 
-        tablaclientes.tBodies[0].appendChild(fragment)
+        tablaClientes.tBodies[0].appendChild(fragment)
     } catch (error) {
         console.log(error);
     }
 }
 
-getclientes();
+getClientes();
 
 
-const guardarclientes = async (e) => {
+const guardarClientes = async (e) => {
     e.preventDefault();
     btnGuardar.disabled = true;
 
-    const url = '../../cotroladores/clientes/index.php'
+    const url = '/moran_mejia_IS2_crudjs/controladores/clientes/index.php'
     const formData = new FormData(formulario)
     formData.append('tipo', 1)
     formData.delete('cli_id')
@@ -131,10 +131,12 @@ const guardarclientes = async (e) => {
                 toast.onmouseleave = Swal.resumeTimer;
             }
         }).fire();
-        // alert(mensaje)
-        // console.log(data);
+
+        alert(mensaje)
+        console.log(data);
+
         if (codigo == 1 && respuesta.status == 200) {
-            getclientes();
+            getClientes();
             formulario.reset();
         } else {
             console.log(detalle);
@@ -148,5 +150,5 @@ const guardarclientes = async (e) => {
 
 
 
-formulario.addEventListener('submit', guardarclientes)
-btnBuscar.addEventListener('click', getclientes)
+formulario.addEventListener('submit', guardarClientes)
+btnBuscar.addEventListener('click', getClientes)
