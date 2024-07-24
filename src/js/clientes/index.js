@@ -9,7 +9,7 @@ const formulario = document.querySelector('form')
 btnModificar.parentElement.style.display = 'none'
 btnCancelar.parentElement.style.display = 'none'
 
-const getClientes = async () => {
+const getClientes = async (alerta = 'si') => {
     const nombre = formulario.cli_nombre.value.trim()
     const apellido = formulario.cli_apellido.value.trim()
     const nit = formulario.cli_nit.value.trim()
@@ -31,6 +31,7 @@ const getClientes = async () => {
         let contador = 1;
         
         if (respuesta.status == 200) {
+            if(alerta == 'si'){
             Swal.mixin({
                 toast: true,
                 position: "top-end",
@@ -44,6 +45,7 @@ const getClientes = async () => {
                     toast.onmouseleave = Swal.resumeTimer;
                 }
             }).fire();
+            }
 
             if (data.length > 0) {
                 data.forEach(clientes => {
@@ -71,6 +73,8 @@ const getClientes = async () => {
 
                     buttonEliminar.textContent = 'Eliminar'
                     buttonEliminar.classList.add('btn', 'btn-danger', 'w-100')
+                    buttonEliminar.addEventListener('click', () => Eliminar(clientes.cli_id));
+
 
                     celda6.appendChild(buttonModificar)
                     celda7.appendChild(buttonEliminar)
@@ -144,7 +148,7 @@ const guardarClientes = async (e) => {
         console.log(data);
 
         if (codigo == 1 && respuesta.status == 200) {
-            getClientes();
+            getClientes(alerta = 'no');
             //formulario.reset();
         } else {
             console.log(detalle);
@@ -222,7 +226,81 @@ const modificar = async(e) => {
                 }
             }).fire();
             formulario.reset()
-            getClientes();
+            getClientes(alerta = 'no');
+            btnBuscar.parentElement.style.display = ''
+            btnGuardar.parentElement.style.display = ''
+            btnLimpiar.parentElement.style.display = ''
+            btnModificar.parentElement.style.display = 'none'
+            btnCancelar.parentElement.style.display = 'none'
+         
+        } else {
+            console.log('Error:', detalle);
+            Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                icon: "error",
+                title: 'Error al guardar',
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            }).fire();
+        }
+    } catch (error) {
+        console.log('Error de conexión:', error);
+        Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            icon: "error",
+            title: 'Error de conexión',
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        }).fire();
+    }
+    btnModificar.disabled = false;
+    btnCancelar.disabled = false;
+
+
+}
+
+const Eliminar = async(cli_id) => {
+    const url = '/moran_mejia_IS2_crudjs/controladores/clientes/index.php';
+    const formData = new FormData();
+    formData.append('tipo', 3);
+    formData.append('cli_id', cli_id);
+    const config = {
+        method: 'POST',
+        body: formData
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+        console.log('Respuesta recibida:', data);
+        const { mensaje, codigo, detalle } = data;
+        if (respuesta.ok && codigo === 1) {
+            Swal.mixin({
+                toast: true,
+                position: "top-start",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                icon: "success",
+                title: mensaje,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            }).fire();
+            getClientes(alerta = 'no');
             btnBuscar.parentElement.style.display = ''
             btnGuardar.parentElement.style.display = ''
             btnLimpiar.parentElement.style.display = ''
